@@ -1,0 +1,14 @@
+{
+  "name": "parabank-cypress-e2e-suite",
+  "version": "1.0.0",
+  "description": "Cypress E2E Automation Test Suite for Para Bank",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Vikum Warnakula",
+  "license": "ISC",
+  "devDependencies": {
+    "cypress": "^13.6.1"
+  }
+}
