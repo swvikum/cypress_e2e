@@ -4,11 +4,15 @@
   "description": "Cypress E2E Automation Test Suite for Para Bank",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node_modules\\.bin\\cypress run",
+    "headedTest": "npm run test -- --headed",
+    "chromeTest": "npm run test -- --browser chrome --parallel"
+
   },
   "author": "Vikum Warnakula",
   "license": "ISC",
   "devDependencies": {
+    "@cypress/xpath": "^2.0.3",
     "cypress": "^13.6.1"
   }
 }
