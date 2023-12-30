@@ -52,23 +52,20 @@ class BillPayPage
         cy.get('[ng-show="showResult"]>.title').should('have.text','Bill Payment Complete');
     }
     
-    doBillPay(firstName, lastName, address, city, state, zipCode, phoneNumber, ssn, userName, pwd, confirmPwd){
-        //cy.intercept("POST", "https://cognito-idp.ap-southeast-2.amazonaws.com/").as("submitRegistartion");
+    doBillPay(payeeName, address, city, state, zipCode, phoneNumber, toAccNo, amount, fromAccNo){
 
-        this.typeFirstName(firstName);
-        this.typeLastName(lastName);
+        this.typePayeeName(payeeName);
         this.typeAddress(address);
         this.typeCity(city);
         this.typeState(state);
         this.typeZipCode(zipCode);
         this.typePhoneNumber(phoneNumber);
-        this.typeSSN(ssn);
-        this.typeUserName(userName);
-        this.typePassword(pwd);
-        this.typeConfirmPassword(confirmPwd);
-        this.clickRegisterButton();
+        this.typeToAccNo(toAccNo);
+        this.typeVerifyToAccNo(toAccNo);
+        this.typeAmount(amount);
+        this.selectFromAccount(fromAccNo)
+        this.clickSendPaymentBtn();
 
-        //cy.wait('@submitRegistartion');
     }
 }
 

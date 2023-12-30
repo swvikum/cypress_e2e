@@ -8,25 +8,28 @@ import { onTransferFundsPage } from "../../pages/transfer.funds.page";
 import { onBillPayPage } from "../../pages/bill.pay.page";
 
 describe("Verify Signup to Fund Transfer User Journey", () => {
-
   let accountNumber;
   let userName;
   let regoData;
+  let billPayData;
 
   before(() => {
     cy.fixture("userSignup.json").then((data) => {
       regoData = data;
     });
 
+    cy.fixture("billPayments.json").then((data) => {
+      billPayData = data;
+    });
+
     cy.generateUniqueUsername().then((uniqueUsername) => {
       userName = uniqueUsername;
       cy.log(`Generated unique username: ${userName}`);
     });
-
   });
 
   it("sign up with unique username", () => {
-    cy.log(regoData.firstName)
+    cy.log(regoData.firstName);
     onSignUpPage.visitSignupPage();
     onSignUpPage.doSignUp(
       regoData.firstName,
@@ -103,6 +106,18 @@ describe("Verify Signup to Fund Transfer User Journey", () => {
     onHomePage.visitHomePage();
     onLoginPage.doLogin(userName, regoData.password);
     onBillPayPage.visitBillPayPage();
+    onBillPayPage.doBillPay(
+      billPayData.payeeName,
+      billPayData.address,
+      billPayData.city,
+      billPayData.state,
+      billPayData.zipCode,
+      billPayData.phone,
+      billPayData.toAccNumber,
+      billPayData.amount,
+      accountNumber
+    );
+    onBillPayPage.VerifyBillPayment();
   });
 
   it("9. Verify Transaction Search API call", () => {
