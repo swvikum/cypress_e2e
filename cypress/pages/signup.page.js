@@ -52,6 +52,10 @@ class SignUpPage
     visitSignupPage(){
         cy.visit('/register.htm')
     }
+
+    checkErrMsgExistingUser(text){
+        cy.get('#customer\\.username\\.errors').should('contain.text', text);
+      }
     
     doSignUp(firstName, lastName, address, city, state, zipCode, phoneNumber, ssn, userName, pwd, confirmPwd){
         //cy.intercept("POST", "https://cognito-idp.ap-southeast-2.amazonaws.com/").as("submitRegistartion");
