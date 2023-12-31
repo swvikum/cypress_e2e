@@ -1,3 +1,8 @@
 node_modules/
-e2e/1-getting-started/
-e2e/2-advanced-examples/
+# Ignore Mochawesome reports
+mochawesome-report/
+# Ignore Cypress screenshots and videos
+/cypress/screenshots/
+/cypress/videos/
+# Ignore Cypress reports
+/cypress/results/mochawesome
