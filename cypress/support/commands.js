@@ -23,11 +23,22 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+Cypress.Commands.add("login", (userName) => {
 
-Cypress.Commands.add("searchTransactions", (userName, accNo) => {
+    cy.visit("/index.htm");
+    cy.wait(1000);
+    cy.get('input[name="username"]').should("be.visible").focus().type(userName);
+    cy.get('input[name="password"]').should("be.visible").type('Test@123');
+    cy.get('[value="Log In"]').click();;
+    cy.wait(2000);
+    cy.get('p > b').should('contain.text', 'Welcome');
+    
+  });
+
+Cypress.Commands.add("searchTransactionsAPI", (userName, accNo, amount) => {
   cy.request({
     method: "GET",
-    url: `http://localhost:8080/parabank/services_proxy/bank/accounts/${accNo}/transactions/amount/10`,
+    url: `http://localhost:8080/parabank/services_proxy/bank/accounts/${accNo}/transactions/amount/${amount}`,
     auth: {
       username: userName,
       password: "Test@123",
@@ -35,6 +46,8 @@ Cypress.Commands.add("searchTransactions", (userName, accNo) => {
   }).then((response) => {
     expect(response.status).to.eq(200);
     expect(response.body).length.to.be.greaterThan(0);
+    let isAccountIdEqual = response.body.some((transaction) => transaction.accountId.toString() === accNo);
+    expect(isAccountIdEqual).to.be.true;
     cy.log(JSON.stringify(response.body));
   });
 });

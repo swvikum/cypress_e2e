@@ -12,7 +12,9 @@ class AccountOpenPage {
     }
 
     clickOpenAccountBtn(){
-        cy.get('input').should('be.enabled').type('{enter}');
+        cy.wait(2000);
+        //cy.get('input').should('be.enabled').type('{enter}');
+        cy.get('input').should('be.enabled').click({force:true});
     }
 
     captureNewAccountId() {

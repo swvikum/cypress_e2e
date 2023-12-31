@@ -7,11 +7,11 @@
     "test": "node_modules\\.bin\\cypress run",
     "headedTest": "npm run test -- --headed",
     "chromeTest": "npm run test -- --browser chrome --parallel",
-    "triggerAllTests-headless": "npx cypress run",
+    "triggerAllTests-headless": "npx cypress run --browser chrome",
     "delete-results": "rm -rf cypress/results/* || true",
     "mochawesome-merge": "npx mochawesome-merge cypress/results/mochawesome/*.json > mochawesome.json && npx marge mochawesome.json",
     "delete-mochawesome-report": "rm -rf mochawesome-report/* || true",
-    "cypress-test-pack": "npm run delete-results && npm run delete-mochawesome-report && npm run triggerAllTests-headless && npm run mochawesome-merge"
+    "cypress-test": "npm run delete-results && npm run delete-mochawesome-report && npm run triggerAllTests-headless && npm run mochawesome-merge"
   },
   "author": "Vikum Warnakula",
   "license": "ISC",

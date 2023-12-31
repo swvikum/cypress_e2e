@@ -12,6 +12,7 @@ describe("Verify Signup to Fund Transfer User Journey", () => {
   let userName;
   let regoData;
   let billPayData;
+  let transferAmount = "10";
 
   before(() => {
     cy.fixture("userSignup.json").then((data) => {
@@ -28,7 +29,7 @@ describe("Verify Signup to Fund Transfer User Journey", () => {
     });
   });
 
-  it("sign up with unique username", () => {
+  it("Verify Signup with Unique Username", () => {
     cy.log(regoData.firstName);
     onSignUpPage.visitSignupPage();
     onSignUpPage.doSignUp(
@@ -47,7 +48,7 @@ describe("Verify Signup to Fund Transfer User Journey", () => {
     onHomePage.checkSuccessRegisterText(regoData.SIGNUP_SUCCESS_MESSAGE);
   });
 
-  it("login with latest signup user", () => {
+  it("Verify Login with latest signup user", () => {
     onLoginPage.visitLoginPage();
     onLoginPage.verifyLoginPage();
     onLoginPage.doLogin(userName, regoData.password);
@@ -63,9 +64,8 @@ describe("Verify Signup to Fund Transfer User Journey", () => {
     onGlobalPage.verifyLeftMenuAboutLink();
   });
 
-  it("5. verify creation saving account", () => {
-    onHomePage.visitHomePage();
-    onLoginPage.doLogin(userName, regoData.password);
+  it("5. Verify Saving Account creation", () => {
+    cy.login(userName);
     onHomePage.clickOpenAccountLink();
     onAccountOpenPage.verifyOpenAccountPage();
     onAccountOpenPage.selectAccountType("SAVINGS");
@@ -79,21 +79,19 @@ describe("Verify Signup to Fund Transfer User Journey", () => {
     cy.log(`Captured Account Number: ${accountNumber}`);
   });
 
-  it("6. verify account overview page", () => {
-    onHomePage.visitHomePage();
-    onLoginPage.doLogin(userName, regoData.password);
+  it("6. Verify Account Overview page", () => {
+    cy.login(userName);
     onHomePage.clickAccountOverviewLink();
     onAccountOverviewPage.verifyAccountOverviewPage();
     onAccountOverviewPage.checkAccountBalance(accountNumber);
   });
 
-  it("7. verify transfering money amoung the accounts", () => {
+  it("7.Verify transfering money existing acccount", () => {
     //let accountNumber = "15120";
-    onHomePage.visitHomePage();
-    onLoginPage.doLogin(userName, regoData.password);
+    cy.login(userName);
     onTransferFundsPage.visitTransferFundsPage();
     cy.wait(2000);
-    onTransferFundsPage.typeTransferAmount(10);
+    onTransferFundsPage.typeTransferAmount(transferAmount);
     cy.log(`From Account Number: ${accountNumber}`);
     onTransferFundsPage.selectFromAccNumber(accountNumber);
     onTransferFundsPage.selectToAccNumber(accountNumber);
@@ -101,10 +99,9 @@ describe("Verify Signup to Fund Transfer User Journey", () => {
     onTransferFundsPage.verifySuccessTransfer();
   });
 
-  it("8. verify bill payments with created account", () => {
+  it("8. Verify Bill  Payments to third-party account", () => {
     //let accountNumber = "15120";
-    onHomePage.visitHomePage();
-    onLoginPage.doLogin(userName, regoData.password);
+    cy.login(userName);
     onBillPayPage.visitBillPayPage();
     onBillPayPage.doBillPay(
       billPayData.payeeName,
@@ -121,7 +118,6 @@ describe("Verify Signup to Fund Transfer User Journey", () => {
   });
 
   it("9. Verify Transaction Search API call", () => {
-    //let accountNumber = "13899";
-    cy.searchTransactions(userName, accountNumber);
+    cy.searchTransactionsAPI(userName, accountNumber, transferAmount);
   });
 });
