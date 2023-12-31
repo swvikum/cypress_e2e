@@ -1,8 +1,10 @@
 node_modules/
-# Ignore Mochawesome reports
-mochawesome-report/
+
 # Ignore Cypress screenshots and videos
 /cypress/screenshots/
 /cypress/videos/
 # Ignore Cypress reports
+mochawesome-report/
 /cypress/results/mochawesome
+/cypress/downloads/
+mochawesome.json
