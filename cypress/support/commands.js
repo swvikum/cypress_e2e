@@ -32,13 +32,13 @@ Cypress.Commands.add("login", (userName) => {
     cy.get('[value="Log In"]').click();;
     cy.wait(2000);
     cy.get('p > b').should('contain.text', 'Welcome');
-    
+
   });
 
 Cypress.Commands.add("searchTransactionsAPI", (userName, accNo, amount) => {
   cy.request({
     method: "GET",
-    url: `http://localhost:8080/parabank/services_proxy/bank/accounts/${accNo}/transactions/amount/${amount}`,
+    url: `${Cypress.config("baseUrl")}/services_proxy/bank/accounts/${accNo}/transactions/amount/${amount}`,
     auth: {
       username: userName,
       password: "Test@123",
