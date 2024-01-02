@@ -1,8 +1,27 @@
-# Para Bank E2E Test Automation Framework
+# Overview
 
-## Overview
+ParaBank is a realistic online banking application designed to facilitate fund transactions for users. This document outlines the End-to-End (E2E) test automation framework developed using Cypress for the ParaBank application. The framework comprehensively covers both UI and API test scenarios.
 
-Para bank is a realistic online banking application that enables users to manage fund transactions. This document outlines the End-to-End (E2E) test automation framework developed using Cypress for the Para bank application. The framework covers both UI and API test scenarios.
+The framework was developed under the Page Object Model Design Pattern, where Page Elements and Actions are organized under pages, aiming to enhance code reusability. Additionally, the following features have been optimized for better reusability and code readability:
+
+- Custom Cypress commands, including login, searchTransactionsAPI, and generateUniqueUsername, were incorporated for enhanced reusability.
+- Fixture data files were utilized to implement a data-driven framework.
+- Cypress commands were employed for managing the baseURL as an environmental variable.
+- MochaAwesome reporting was integrated, consolidating all reports into an HTML report at the end of the test.
+- Scripts were added to the `package.json` file for seamless integration with CI/CD pipelines.
+
+## Execution Instructions
+
+To run the tests, follow these steps:
+
+1. Run `npm install` to install the necessary packages.
+2. Execute `npm run chromeTest` to run all tests in headless mode with the Chrome browser.
+3. Alternatively, use `npm run cypress-test` to run all tests with MochaAwesome reports in headless mode with the Chrome browser.
+
+## Note
+
+During the development of the framework, the System Under Test (SUT) environment (https://parabank.parasoft.com/) was temporarily unavailable. As a workaround, a local instance at http://localhost:8080/parabank was used for testing purposes.
+
 
 - **Application URL:** [Para Bank](https://parabank.parasoft.com/)
 

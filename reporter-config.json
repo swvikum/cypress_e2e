@@ -7,7 +7,7 @@
       "quite": true,
       "overwrite": false,
       "html": true,
-      "json": false
+      "json": true
     }
   }
 }
